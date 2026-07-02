@@ -1,0 +1,4653 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>قسم الامتحانات</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>قسم امتحانات المفردات</h1>
+    <p>أسئلة فراغ فقط بنمط وزاري + ترتيب عشوائي + شرح لكل إجابة</p>
+  </header>
+
+  <div class="wrapper">
+    
+<aside class="side-nav" aria-label="التنقل الرئيسي">
+  <h2>الأقسام</h2>
+  <a class="nav-link " href="index.html">الرئيسية</a>
+  <a class="nav-link " href="meanings.html">قسم المعاني</a>
+  <a class="nav-link active" href="exams.html">قسم الامتحانات</a>
+</aside>
+
+    <main class="card">
+      <div class="section-head">
+        <div>
+          <h2>الامتحانات</h2>
+          <span>كل معنى إله 3 صيغ فراغ مختلفة، بدون أسئلة معنى مباشر</span>
+        </div>
+        <span class="badge">Cloze MCQ</span>
+      </div>
+
+      <div class="tools-row">
+        <select class="tool-select" id="examUnit">
+          <option value="all">كل الوحدات</option>
+          <option value="01">Unit 01</option>
+<option value="02">Unit 02</option>
+<option value="04">Unit 04</option>
+<option value="05">Unit 05</option>
+<option value="06">Unit 06</option>
+<option value="07">Unit 07</option>
+<option value="08">Unit 08</option>
+<option value="09">Unit 09</option>
+        </select>
+        <select class="tool-select" id="questionLimit">
+          <option value="10">10 أسئلة</option>
+          <option value="20" selected>20 سؤال</option>
+          <option value="30">30 سؤال</option>
+          <option value="50">50 سؤال</option>
+          <option value="all">كل معاني الوحدة</option>
+        </select>
+        <button class="btn" id="startExamBtn" type="button">ابدأ الامتحان</button>
+        <button class="btn ghost" id="nextBtn" type="button">السؤال التالي</button>
+        <button class="btn ghost" id="resetExamBtn" type="button">إعادة ضبط</button>
+        <button class="btn danger" id="resetMemoryBtn" type="button">تصفير ذاكرة الأسئلة</button>
+      </div>
+
+      <div class="exam-shell">
+        <div class="exam-card">
+          <div class="status-bar">
+            <span>السؤال: <strong id="questionNumber">0</strong> / <strong id="totalQuestions">0</strong></span>
+            <span>النتيجة: <strong id="scoreValue">0</strong></span>
+            <span>الوحدة: <strong id="activeExamUnit">-</strong></span>
+          </div>
+          <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="question-area" id="questionArea">اضغط ابدأ الامتحان لتوليد أسئلة فراغ عشوائية</div>
+          <div class="options-grid" id="optionsGrid">
+            <button class="option" type="button">A</button>
+            <button class="option" type="button">B</button>
+            <button class="option" type="button">C</button>
+            <button class="option" type="button">D</button>
+          </div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+        <div class="exam-card">
+          <h3 style="margin-top: 0;">تحليل الأخطاء</h3>
+          <div id="mistakesBox" class="note-box">هون بنحط لاحقًا الأخطاء حسب الوحدة والكلمة ونوع السؤال</div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer>قسم الامتحانات جاهز</footer>
+  <script>const VOCAB_ITEMS = [
+  {
+    "id": "u01-1",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Carry a message",
+    "meaning": "يحمل رسالة",
+    "example": "Smoke signals can carry a message over a long distance.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-2",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Convey a message",
+    "meaning": "يوصل / ينقل رسالة",
+    "example": "A picture can convey a message without words.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-3",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Deliver a message",
+    "meaning": "يسلّم رسالة",
+    "example": "The courier delivered the message to the office.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-4",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Lose contact / touch with somebody",
+    "meaning": "يفقد الاتصال / التواصل مع شخص",
+    "example": "I lost contact with my friend after he moved abroad.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-5",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Make contact with somebody",
+    "meaning": "يجري اتصالًا / يتواصل مع شخص",
+    "example": "The team made contact with the climbers by radio.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-6",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Pass on a message",
+    "meaning": "يمرر رسالة لشخص آخر",
+    "example": "Could you pass on this message to your brother?",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-7",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Spread the message",
+    "meaning": "ينشر الرسالة",
+    "example": "Social media helped spread the message quickly.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-8",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Stay in touch",
+    "meaning": "يبقى على تواصل",
+    "example": "We stayed in touch after leaving school.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-9",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Establish contact",
+    "meaning": "ينشئ / يبدأ تواصل",
+    "example": "The rescue team tried to establish contact with the lost climbers.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u01-10",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Maintain contact / touch",
+    "meaning": "يحافظ على التواصل",
+    "example": "I still maintain contact with my old school friends.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u01-11",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 1 WL1.1 - Collocations",
+    "term": "Keep in touch",
+    "meaning": "يبقى على تواصل",
+    "example": "We promised to keep in touch after the course ended.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u01-12",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Bring about",
+    "meaning": "يسبّب / يُحدث تغييرًا",
+    "example": "Technology has brought about many changes.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-13",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Come across",
+    "meaning": "يجد بالصدفة / يصادف",
+    "example": "I came across an interesting article yesterday.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-14",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Figure out",
+    "meaning": "يفهم / يستنتج / يجد حلًا",
+    "example": "It took me a while to figure out the answer.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-15",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Get across",
+    "meaning": "يوضح / يوصّل فكرة",
+    "example": "The teacher got the idea across clearly.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-16",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Groom",
+    "meaning": "ينظف الفرو أو الشعر للحيوانات",
+    "example": "Chimpanzees groom each other to show care.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-17",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Make out",
+    "meaning": "يميز بصعوبة بالنظر أو السمع",
+    "example": "I could just make out a shape in the dark.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-18",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Omnivore",
+    "meaning": "كائن يتغذى على النباتات والحيوانات",
+    "example": "A bear is an omnivore.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-19",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Pick up",
+    "meaning": "يلتقط إشارة أو صوتًا",
+    "example": "The radio picked up a weak signal.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-20",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Point out",
+    "meaning": "يشير إلى / يوضح",
+    "example": "She pointed out my spelling mistake.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-21",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Rival",
+    "meaning": "منافس / غريم",
+    "example": "The two teams have always been rivals.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-22",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Spell out",
+    "meaning": "يشرح بالتفصيل / يوضح تمامًا",
+    "example": "Please spell out what you mean.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-23",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Take in",
+    "meaning": "يستوعب / يفهم",
+    "example": "I could not take in all the information at once.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-24",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 2 WL1.2 - Phrasal verbs and reading words",
+    "term": "Wipe out",
+    "meaning": "يبيد / يقضي تمامًا على",
+    "example": "The disease wiped out many animals.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-25",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Astonished",
+    "meaning": "مندهش جدًا / مذهول",
+    "example": "I was astonished by the exam result.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-26",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Bewildered",
+    "meaning": "حائر جدًا / مشوش",
+    "example": "He looked bewildered when he saw the map.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-27",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Devastated",
+    "meaning": "محطّم نفسيًا / حزين جدًا",
+    "example": "She was devastated after losing the match.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-28",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Ecstatic",
+    "meaning": "في غاية السعادة",
+    "example": "I was ecstatic when I passed the test.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-29",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Exasperated",
+    "meaning": "غاضب جدًا / ضائق ذرعًا",
+    "example": "The teacher became exasperated by the noise.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-30",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Livid",
+    "meaning": "مستشيط غضبًا",
+    "example": "My father was livid when he saw the broken window.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-31",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Tense",
+    "meaning": "متوتر / مشدود الأعصاب",
+    "example": "I felt tense before the interview.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u01-32",
+    "unit": "01",
+    "unitTitle": "Unit 01",
+    "section": "Lesson 5 WL1.3 - Emotion adjectives",
+    "term": "Terrified",
+    "meaning": "مرعوب / خائف جدًا",
+    "example": "The child was terrified of the storm.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-1",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Due to",
+    "meaning": "بسبب / ناتج عن",
+    "example": "The match was cancelled due to heavy rain.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-2",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "As a result of",
+    "meaning": "نتيجةً لـ",
+    "example": "Many animals died as a result of habitat loss.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-3",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Lead to",
+    "meaning": "يؤدي إلى",
+    "example": "Pollution can lead to serious health problems.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-4",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "A big cause of",
+    "meaning": "سبب كبير لـ",
+    "example": "Vehicle emissions are a big cause of air pollution.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-5",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "As a consequence of",
+    "meaning": "كنتيجة لـ",
+    "example": "As a consequence of global warming, temperatures are rising.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-6",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Cause",
+    "meaning": "يسبّب",
+    "example": "Toxic waste can cause serious damage.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-7",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Give rise to",
+    "meaning": "يؤدي إلى حدوث / يفسح المجال لـ",
+    "example": "Climate change may give rise to freak weather.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-8",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Result from",
+    "meaning": "ينتج عن",
+    "example": "Soil erosion can result from heavy rain.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-9",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Cause and Effect Phrases",
+    "term": "Result in",
+    "meaning": "يسفر عن / يؤدي إلى",
+    "example": "Water scarcity can result in conflict.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-10",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Acid rain",
+    "meaning": "مطر حمضي",
+    "example": "Acid rain can damage forests.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-11",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Endangered species",
+    "meaning": "أنواع مهددة بالانقراض",
+    "example": "The panda is an endangered species.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-12",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Exhaust fumes",
+    "meaning": "غازات العادم",
+    "example": "Exhaust fumes from cars pollute the air.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-13",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Fossil fuels",
+    "meaning": "الوقود الأحفوري",
+    "example": "Burning fossil fuels increases greenhouse gases.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-14",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Global warming",
+    "meaning": "الاحتباس الحراري العالمي",
+    "example": "Global warming affects the whole planet.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-15",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Greenhouse gases",
+    "meaning": "غازات الدفيئة",
+    "example": "Carbon dioxide is one of the greenhouse gases.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-16",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Habitat loss",
+    "meaning": "فقدان الموائل الطبيعية",
+    "example": "Habitat loss threatens many animals.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-17",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Ozone layer",
+    "meaning": "طبقة الأوزون",
+    "example": "The ozone layer protects us from harmful rays.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-18",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Renewable energy",
+    "meaning": "الطاقة المتجددة",
+    "example": "Solar power is a type of renewable energy.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-19",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Soil erosion",
+    "meaning": "تآكل / انجراف التربة",
+    "example": "Planting trees can reduce soil erosion.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-20",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Toxic waste",
+    "meaning": "نفايات سامة",
+    "example": "Toxic waste must be stored safely.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-21",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Vehicle emissions",
+    "meaning": "انبعاثات المركبات",
+    "example": "Vehicle emissions are harmful to the environment.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-22",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Water scarcity",
+    "meaning": "شح المياه",
+    "example": "Water scarcity is a serious problem in many countries.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-23",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Threats to the Environment",
+    "term": "Wind turbine",
+    "meaning": "توربين رياح",
+    "example": "A wind turbine produces clean energy.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-24",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Blistering heat",
+    "meaning": "حرارة لاهبة / شديدة",
+    "example": "People stayed indoors because of the blistering heat.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-25",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Freak weather",
+    "meaning": "طقس غريب / غير طبيعي",
+    "example": "Freak weather has become more common.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-26",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Gale-force winds",
+    "meaning": "رياح عاتية",
+    "example": "Gale-force winds damaged the roofs.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-27",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Heavy rain / Torrential rain",
+    "meaning": "مطر غزير / جارف",
+    "example": "Torrential rain caused flooding.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-28",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "High humidity",
+    "meaning": "رطوبة عالية",
+    "example": "High humidity makes the heat feel worse.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-29",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Scorching / Soaring temperatures",
+    "meaning": "درجات حرارة حارقة / مرتفعة جدًا",
+    "example": "Soaring temperatures affected farmers.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-30",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Weather Vocabulary",
+    "term": "Sub-zero temperatures",
+    "meaning": "درجات حرارة تحت الصفر",
+    "example": "Sub-zero temperatures froze the lake.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-31",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Invertebrates",
+    "meaning": "اللافقاريات",
+    "example": "Insects are invertebrates.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-32",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Marine creature",
+    "meaning": "كائن بحري",
+    "example": "A turtle is a marine creature.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-33",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Fins",
+    "meaning": "زعانف",
+    "example": "Fish use their fins to swim.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-34",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Skeleton",
+    "meaning": "هيكل عظمي",
+    "example": "The museum displayed a whale skeleton.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-35",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Crustaceans",
+    "meaning": "القشريات",
+    "example": "Crabs and lobsters are crustaceans.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-36",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Mammals",
+    "meaning": "الثدييات",
+    "example": "Whales are mammals, not fish.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-37",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Scales",
+    "meaning": "حراشف / قشور",
+    "example": "Some animals are covered in scales.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-38",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Reptile",
+    "meaning": "زاحف",
+    "example": "A snake is a reptile.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-39",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Nocturnal primate",
+    "meaning": "رئيسيات ليلية",
+    "example": "The aye-aye is a nocturnal primate.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-40",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Critically endangered",
+    "meaning": "مهدد بالانقراض بدرجة حرجة",
+    "example": "The animal is critically endangered.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-41",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Extinct",
+    "meaning": "منقرض",
+    "example": "Dinosaurs are extinct.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-42",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Cuddly / Cute",
+    "meaning": "لطيف / قابل للاحتضان",
+    "example": "People often protect animals they think are cute.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-43",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Solitary creatures",
+    "meaning": "كائنات منعزلة",
+    "example": "Some cats are solitary creatures.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-44",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Furry",
+    "meaning": "كسيّ بالفرو",
+    "example": "The furry animal looked harmless.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-45",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Harmless",
+    "meaning": "غير ضار / أليف",
+    "example": "Most small insects are harmless.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-46",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Bred in captivity",
+    "meaning": "يتم تربيتها أو إكثارها في الأسر",
+    "example": "Some endangered animals are bred in captivity.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-47",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Poacher",
+    "meaning": "صياد غير شرعي",
+    "example": "A poacher kills animals illegally.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-48",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Natural predators",
+    "meaning": "المفترسات الطبيعية",
+    "example": "Adult tigers have few natural predators.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-49",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Wildlife and Threats",
+    "term": "Nets",
+    "meaning": "شباك الصيد",
+    "example": "Sea turtles can get trapped in fishing nets.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-50",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "I'm on the fence",
+    "meaning": "أنا على الحياد / لم أقرر بعد",
+    "example": "I’m on the fence about which project to choose.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-51",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "I'm torn between ... and ...",
+    "meaning": "أنا محتار بين ... و ...",
+    "example": "I’m torn between recycling plastic and planting trees.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-52",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "I'm having second thoughts",
+    "meaning": "بدأت أراجع حساباتي",
+    "example": "I’m having second thoughts about the plan.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-53",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "I can't make up my mind",
+    "meaning": "لا أستطيع اتخاذ قرار",
+    "example": "I can’t make up my mind about the best solution.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-54",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "I can't put my finger on it",
+    "meaning": "لا أستطيع تحديد الأمر بدقة",
+    "example": "Something is wrong, but I can’t put my finger on it.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-55",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "You're spot on!",
+    "meaning": "أنت مصيب تمامًا",
+    "example": "You’re spot on; pollution is the main problem.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-56",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Problem-solving and Indecision",
+    "term": "It doesn't grab me",
+    "meaning": "لا يشدني / لا يعجبني",
+    "example": "This idea doesn’t grab me.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-57",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Pressing problem",
+    "meaning": "مشكلة ملحة",
+    "example": "Plastic waste is a pressing problem.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-58",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Non-biodegradable",
+    "meaning": "غير قابل للتحلل الحيوي",
+    "example": "Plastic bags are non-biodegradable.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-59",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Sustainable cardboard",
+    "meaning": "كرتون مستدام",
+    "example": "The shop should use sustainable cardboard.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-60",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "As a matter of urgency",
+    "meaning": "على وجه السرعة",
+    "example": "This issue must be dealt with as a matter of urgency.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-61",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Tackle this problem",
+    "meaning": "يعالج / يواجه هذه المشكلة",
+    "example": "We need to tackle this problem immediately.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-62",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Plastic-free aisle",
+    "meaning": "ممر خالٍ من البلاستيك",
+    "example": "The supermarket opened a plastic-free aisle.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-63",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Ethical practices",
+    "meaning": "ممارسات أخلاقية",
+    "example": "Customers support companies with ethical practices.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-64",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Win over",
+    "meaning": "يكسب تأييد / يجذب",
+    "example": "The plan may win over more customers.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-65",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "I urge you to",
+    "meaning": "أحثكم على",
+    "example": "I urge you to reduce plastic packaging.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-66",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Yours faithfully",
+    "meaning": "تفضلوا بقبول فائق الاحترام",
+    "example": "Yours faithfully, Ali Nasser.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-67",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "draw your attention to",
+    "meaning": "يلفت انتباهك إلى",
+    "example": "I am writing to draw your attention to a pressing problem.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-68",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "I am deeply concerned by",
+    "meaning": "أنا قلق جدًا بشأن",
+    "example": "I am deeply concerned by the amount of plastic waste in our area.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-69",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "I look forward to your response",
+    "meaning": "أتطلع إلى ردّك",
+    "example": "I look forward to your response and hope action will be taken soon.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-70",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Formal Email Vocabulary",
+    "term": "Yours sincerely",
+    "meaning": "مع خالص التحية، لما تعرف اسم الشخص",
+    "example": "Yours sincerely, Ahmad Saleh.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-71",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Persuasive",
+    "meaning": "مقنع",
+    "example": "Her speech was very persuasive.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-72",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Rhetorical devices",
+    "meaning": "أساليب بلاغية",
+    "example": "The speaker used rhetorical devices to persuade the audience.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-73",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Rhetorical questions",
+    "meaning": "أسئلة بلاغية",
+    "example": "Rhetorical questions make listeners think.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-74",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Repetition",
+    "meaning": "التكرار",
+    "example": "Repetition can make a message stronger.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-75",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Tripling",
+    "meaning": "التثليث / ذكر ثلاث أفكار",
+    "example": "Tripling helps make a presentation memorable.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-76",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Props",
+    "meaning": "أدوات مساعدة / مجسمات توضيحية",
+    "example": "The presenter used props during the talk.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-77",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Persuasive Presentation",
+    "term": "Anecdote",
+    "meaning": "قصة قصيرة واقعية",
+    "example": "He began his presentation with an anecdote.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u02-78",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be bound to",
+    "meaning": "من المؤكد / لا بد أن",
+    "example": "The new recycling plan is bound to reduce waste.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-79",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be certain to",
+    "meaning": "من المؤكد أن",
+    "example": "Renewable energy is certain to become more common.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-80",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be sure to",
+    "meaning": "من المؤكد أن",
+    "example": "This issue is sure to attract public attention.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-81",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be likely to",
+    "meaning": "من المحتمل أن",
+    "example": "Water scarcity is likely to affect many countries.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-82",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be unlikely to",
+    "meaning": "من غير المحتمل أن",
+    "example": "People are unlikely to stop using smart devices completely.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-83",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be planning to",
+    "meaning": "يخطط أن",
+    "example": "The school is planning to start an environmental campaign.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-84",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be hoping to",
+    "meaning": "يأمل أن",
+    "example": "We are hoping to install solar panels next year.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-85",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be thinking of + -ing",
+    "meaning": "يفكر في فعل شيء",
+    "example": "They are thinking of reducing plastic use.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-86",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be about to",
+    "meaning": "على وشك أن",
+    "example": "The lecture is about to start.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-87",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be due to",
+    "meaning": "من المقرر أن",
+    "example": "The new project is due to begin in June.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u02-88",
+    "unit": "02",
+    "unitTitle": "Unit 02",
+    "section": "Future Phrases - Filtered Additions",
+    "term": "be to + infinitive",
+    "meaning": "من المقرر / المطلوب رسميًا أن",
+    "example": "The president is to meet environmental experts tomorrow.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-1",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Bizarre / Weird / Strange",
+    "meaning": "غريب / عجيب",
+    "example": "The story sounded bizarre, so I checked the source.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-2",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Claim / Maintain / State",
+    "meaning": "يدّعي / يصرّح",
+    "example": "The journalist claimed that the photo was fake.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-3",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Clues / Hints / Signs",
+    "meaning": "أدلة / إشارات / علامات",
+    "example": "There were clues that the story was not true.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-4",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Decrease / Drop / Go down",
+    "meaning": "ينخفض / يقل",
+    "example": "The number of readers went down last month.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-5",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Dependable / Reliable / Trustworthy",
+    "meaning": "موثوق / يعتمد عليه",
+    "example": "A trustworthy journalist verifies sources.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-6",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Enigma / Mystery / Puzzle",
+    "meaning": "لغز / غموض",
+    "example": "The missing photo became a mystery.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-7",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Expose / Reveal / Uncover",
+    "meaning": "يكشف / يزيح الستار عن",
+    "example": "The report exposed corruption.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-8",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Fake News and Stories",
+    "term": "Fraud / Hoax / Fake",
+    "meaning": "خدعة / تزييف / احتيال",
+    "example": "The viral story was a hoax.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-9",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Attract attention",
+    "meaning": "يجذب الانتباه",
+    "example": "Clickbait headlines attract attention quickly.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-10",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Go viral",
+    "meaning": "ينتشر بسرعة هائلة",
+    "example": "The video went viral overnight.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-11",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Advertising revenue",
+    "meaning": "عائدات الإعلانات",
+    "example": "Websites make money from advertising revenue.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-12",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Short attention span",
+    "meaning": "مدى انتباه قصير",
+    "example": "Many readers have a short attention span online.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-13",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Shed light on",
+    "meaning": "يسلط الضوء على",
+    "example": "The article shed light on poverty.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-14",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "In the public interest",
+    "meaning": "في مصلحة العامة",
+    "example": "The information was published in the public interest.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-15",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Expose corruption",
+    "meaning": "يكشف الفساد",
+    "example": "The newspaper exposed corruption in the city council.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-16",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Verify sources",
+    "meaning": "يتأكد من المصادر",
+    "example": "Good reporters verify sources before publishing.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-17",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "Present both sides",
+    "meaning": "يعرض وجهتي النظر",
+    "example": "A balanced report should present both sides.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-18",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "clickbait headlines",
+    "meaning": "عناوين مضللة / مثيرة للنقر",
+    "example": "Clickbait headlines often do not tell the whole story.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-19",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "generate revenue",
+    "meaning": "يولّد / يحقق عائدات",
+    "example": "Websites use online adverts to generate revenue.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-20",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "hit the headlines",
+    "meaning": "يتصدر الأخبار",
+    "example": "The corruption story hit the headlines last night.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-21",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Reporting and Clickbait",
+    "term": "raise awareness",
+    "meaning": "يرفع الوعي",
+    "example": "The campaign aims to raise awareness of fake news.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-22",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Balanced",
+    "meaning": "متوازن / موضوعي",
+    "example": "The article was balanced and fair.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-23",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Exclusive",
+    "meaning": "حصري",
+    "example": "The newspaper published an exclusive interview.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-24",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Hard-hitting",
+    "meaning": "قوي / حاد اللهجة ومؤثر",
+    "example": "The documentary was hard-hitting.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-25",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Heartbreaking",
+    "meaning": "مفجع / يدمي القلب",
+    "example": "The story of the poor child was heartbreaking.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-26",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Heartwarming",
+    "meaning": "مبهج / يسر القلب",
+    "example": "The rescue story was heartwarming.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-27",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Newsworthy",
+    "meaning": "يستحق النشر",
+    "example": "The event was newsworthy.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-28",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Off the record",
+    "meaning": "ليس للنشر العلني",
+    "example": "The minister spoke off the record.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-29",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Quirky",
+    "meaning": "غريب بشكل طريف",
+    "example": "The newspaper shared a quirky story.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-30",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Sensational",
+    "meaning": "مثير للضجة",
+    "example": "Some websites publish sensational stories.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-31",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "News Adjectives",
+    "term": "Topical",
+    "meaning": "مرتبط بالأحداث الجارية",
+    "example": "Climate change is a topical issue.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-32",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Allege → Allegation",
+    "meaning": "يدّعي → ادعاء",
+    "example": "The allegation was later denied.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-33",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Improve → Improvement",
+    "meaning": "يحسن → تحسن / تطوير",
+    "example": "There was a clear improvement in the service.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-34",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Replace → Replacement",
+    "meaning": "يستبدل → بديل / استبدال",
+    "example": "I asked for a replacement or a refund.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-35",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Solve → Solution",
+    "meaning": "يحل → حل",
+    "example": "They came up with a solution.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-36",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Obstruct → Obstruction",
+    "meaning": "يعيق → عرقلة",
+    "example": "The road obstruction caused delays.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-37",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Suspend → Suspension",
+    "meaning": "يعلّق → تعليق / إيقاف مؤقت",
+    "example": "The suspension of work angered the workers.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-38",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Come up with a solution",
+    "meaning": "يجد / يطرح حلًا",
+    "example": "The council came up with a solution to the problem.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-39",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Refute the allegation",
+    "meaning": "يدحض الادعاء",
+    "example": "The manager refuted the allegation.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-40",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Release a statement",
+    "meaning": "يصدر بيانًا",
+    "example": "The company released a statement yesterday.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-41",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Word Building and Collocations",
+    "term": "Report the incident",
+    "meaning": "يبلغ عن الحادثة",
+    "example": "She reported the incident to the police.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-42",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Cropped",
+    "meaning": "مقصوصة",
+    "example": "The photo was cropped to focus on the child.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-43",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Background",
+    "meaning": "خلفية",
+    "example": "There were mountains in the background.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-44",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Captures",
+    "meaning": "يلتقط / يجسد",
+    "example": "The photo captures a powerful moment.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-45",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Likeness",
+    "meaning": "تشابه / شبه",
+    "example": "The painting has a strong likeness to the king.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-46",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Posing",
+    "meaning": "يتخذ وضعية للتصوير",
+    "example": "The students were posing for a photo.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-47",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Poignant",
+    "meaning": "مؤثر / يثير الشجن",
+    "example": "The image was poignant and unforgettable.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-48",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Composed",
+    "meaning": "مرتبة / مكوّنة بعناية",
+    "example": "The photograph was beautifully composed.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-49",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Subject matter",
+    "meaning": "موضوع الصورة الأساسي",
+    "example": "The subject matter of the photo is war.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-50",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Photography",
+    "term": "Iconic",
+    "meaning": "أيقوني / شهير جدًا",
+    "example": "The image became iconic.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-51",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Obviously",
+    "meaning": "بوضوح / بديهيًا",
+    "example": "Obviously, the story was false.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-52",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Theoretically",
+    "meaning": "نظريًا",
+    "example": "Theoretically, anyone can start a blog.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-53",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Disappointingly",
+    "meaning": "للأسف / بشكل مخيب للآمال",
+    "example": "Disappointingly, the report was biased.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-54",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Foolishly",
+    "meaning": "بحماقة",
+    "example": "Foolishly, he shared the fake story.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-55",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Presumably",
+    "meaning": "على ما يبدو / يُفترض",
+    "example": "Presumably, the editor checked the facts.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-56",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Apparently",
+    "meaning": "ظاهريًا / حسبما يبدو",
+    "example": "Apparently, the photo was edited.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-57",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Surely",
+    "meaning": "بالتأكيد",
+    "example": "Surely, this cannot be true.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-58",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Fortunately",
+    "meaning": "لحسن الحظ",
+    "example": "Fortunately, nobody believed the hoax.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-59",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Unbelievably",
+    "meaning": "بشكل لا يصدق",
+    "example": "Unbelievably, the fake story went viral.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-60",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Comment Adverbs",
+    "term": "Clearly",
+    "meaning": "بوضوح",
+    "example": "Clearly, the article was biased.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u04-61",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "bias",
+    "meaning": "تحيز",
+    "example": "Readers should recognise bias in news reports.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-62",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "biased",
+    "meaning": "متحيز",
+    "example": "The article was biased because it presented only one side.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-63",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "recognise bias",
+    "meaning": "يميز / يتعرف على التحيز",
+    "example": "It is important to recognise bias before trusting a report.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-64",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "protest",
+    "meaning": "احتجاج",
+    "example": "The protest was held outside the new hotel.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-65",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "take part in a protest",
+    "meaning": "يشارك في احتجاج",
+    "example": "Many local people took part in a protest against the plan.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-66",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "bellow",
+    "meaning": "يصرخ بصوت قوي وعميق",
+    "example": "The angry man bellowed at the reporters.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u04-67",
+    "unit": "04",
+    "unitTitle": "Unit 04",
+    "section": "Bias and Protest - Filtered Additions",
+    "term": "mutter",
+    "meaning": "يتمتم / يحكي بصوت واطي",
+    "example": "She muttered something under her breath.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u05-1",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Eyesight",
+    "meaning": "النظر / حاسة البصر",
+    "example": "My grandmother’s eyesight is still very good.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-2",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Colour-blind",
+    "meaning": "مصاب بعمى الألوان",
+    "example": "He is colour-blind and cannot tell red from green.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-3",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Hearing loss",
+    "meaning": "فقدان السمع",
+    "example": "Loud music can cause hearing loss.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-4",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Taste buds",
+    "meaning": "براعم التذوق",
+    "example": "Taste buds help us identify flavours.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-5",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Supertaster",
+    "meaning": "فائق التذوق",
+    "example": "A supertaster is very sensitive to bitter food.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-6",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Proprioception",
+    "meaning": "الحس العميق / إدراك حركة الجسم",
+    "example": "Proprioception helps you touch your nose with your eyes closed.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-7",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Core Vocabulary - Senses and Abilities",
+    "term": "Keener",
+    "meaning": "أكثر حدة / أقوى",
+    "example": "Dogs have a keener sense of smell than humans.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-8",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Verbs of Perception",
+    "term": "Perceive",
+    "meaning": "يدرك / يلاحظ عبر الحواس",
+    "example": "Different people perceive colours differently.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-9",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Verbs of Perception",
+    "term": "Detect",
+    "meaning": "يكتشف / يرصد",
+    "example": "The device can detect small movements.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-10",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Verbs of Perception",
+    "term": "Make out",
+    "meaning": "يميز بصعوبة",
+    "example": "I could not make out the words on the sign.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-11",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Verbs of Perception",
+    "term": "Fade",
+    "meaning": "يتلاشى / يضعف تدريجيًا",
+    "example": "The sound faded in the distance.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-12",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Extra Topics",
+    "term": "Condiment",
+    "meaning": "توابل / مطيبات",
+    "example": "Ketchup is a popular condiment.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-13",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Extra Topics",
+    "term": "Social work",
+    "meaning": "العمل الاجتماعي",
+    "example": "She wants to study social work at university.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-14",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Grammar Focus",
+    "term": "Used to + infinitive",
+    "meaning": "كان يفعل في الماضي ولم يعد الآن",
+    "example": "I used to wear glasses when I was younger.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-15",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Grammar Focus",
+    "term": "Be used to + V-ing / noun",
+    "meaning": "معتاد على شيء الآن",
+    "example": "I am used to the noise in the city.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u05-16",
+    "unit": "05",
+    "unitTitle": "Unit 05",
+    "section": "Grammar Focus",
+    "term": "Get used to + V-ing / noun",
+    "meaning": "يتعود تدريجيًا على شيء جديد",
+    "example": "I am getting used to my new lenses.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-1",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "On the move",
+    "meaning": "في تنقل مستمر",
+    "example": "Digital nomads are often on the move.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-2",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Home comforts",
+    "meaning": "وسائل الراحة المنزلية",
+    "example": "I miss my home comforts when I travel.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-3",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Work remotely",
+    "meaning": "يعمل عن بعد",
+    "example": "Many people now work remotely.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-4",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Put down roots",
+    "meaning": "يستقر / يرسخ جذوره",
+    "example": "After years of travelling, he decided to put down roots.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-5",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Co-working space",
+    "meaning": "مساحة عمل مشتركة",
+    "example": "She works from a co-working space in Amman.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-6",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Settle down",
+    "meaning": "يستقر في مكان أو حياة معينة",
+    "example": "He wants to settle down and start a family.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-7",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Tied down",
+    "meaning": "مقيد بالتزامات أو مكان",
+    "example": "He dislikes being tied down to one place.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-8",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Nomadic Lifestyle",
+    "term": "Digital nomad",
+    "meaning": "رحالة رقمي",
+    "example": "A digital nomad can work from anywhere.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-9",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Compact",
+    "meaning": "مدمج / صغير ومصمم بذكاء",
+    "example": "A compact flat can still be comfortable.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-10",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Cramped",
+    "meaning": "ضيق / محشور",
+    "example": "The room felt cramped with five people inside.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-11",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Confined",
+    "meaning": "محصور / ضيق ومغلق",
+    "example": "Some people feel nervous in confined spaces.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-12",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Densely populated",
+    "meaning": "مكتظ بالسكان",
+    "example": "Tokyo is a densely populated city.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-13",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Excess",
+    "meaning": "زائد عن الحاجة",
+    "example": "Living small helps you get rid of excess possessions.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-14",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Houses and Space",
+    "term": "Medium-sized",
+    "meaning": "متوسط الحجم",
+    "example": "They live in a medium-sized apartment.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-15",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Do up",
+    "meaning": "يرمم / يجدد",
+    "example": "We are going to do up the kitchen.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-16",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Get rid of",
+    "meaning": "يتخلص من",
+    "example": "You should get rid of old clothes.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-17",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Mend",
+    "meaning": "يصلح",
+    "example": "My mother mended my jacket.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-18",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Replace",
+    "meaning": "يستبدل",
+    "example": "We need to replace the broken window.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-19",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Tangled leads / wires",
+    "meaning": "أسلاك متشابكة",
+    "example": "There were tangled leads behind the TV.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-20",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Shattered glass",
+    "meaning": "زجاج متناثر / متكسر",
+    "example": "The storm left shattered glass on the floor.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-21",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Shrunk clothes",
+    "meaning": "ملابس انكمشت",
+    "example": "The sweater became shrunk clothes after washing.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-22",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Scratched screen",
+    "meaning": "شاشة مخدوشة",
+    "example": "It is hard to read messages on a scratched screen.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-23",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Leaking pipe",
+    "meaning": "أنبوب يسرب الماء",
+    "example": "A leaking pipe flooded the bathroom.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-24",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Household Problems and Solutions",
+    "term": "Carpet stain",
+    "meaning": "بقعة على السجادة",
+    "example": "Coffee left a carpet stain.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-25",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Break down",
+    "meaning": "يتعطل",
+    "example": "The freezer broke down yesterday.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-26",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Come across",
+    "meaning": "يصادف / يجد بالصدفة",
+    "example": "I came across an old photo in the drawer.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-27",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Mop up",
+    "meaning": "يمسح / يجفف السوائل",
+    "example": "Please mop up the water on the floor.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-28",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Sweep up",
+    "meaning": "يكنس",
+    "example": "He swept up the broken glass.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-29",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Wipe down",
+    "meaning": "يمسح لتنظيف السطح",
+    "example": "Wipe down the table after lunch.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-30",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "Clear up",
+    "meaning": "يرتب / ينظف المكان",
+    "example": "Let’s clear up the kitchen.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-31",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "switch something off",
+    "meaning": "يطفئ شيئًا",
+    "example": "My father always asks me to switch the lamps off before bed.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-32",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "carry out",
+    "meaning": "ينفذ / يقوم بـ",
+    "example": "They will carry out repairs next week.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-33",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "throw away",
+    "meaning": "يرمي / يتخلص من",
+    "example": "You should throw away things you no longer need.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-34",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Phrasal Verbs",
+    "term": "wipe off",
+    "meaning": "يمسح عن سطح",
+    "example": "Please wipe the stain off the table.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-35",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Marginally / Slightly",
+    "meaning": "قليلًا / بفارق بسيط",
+    "example": "This room is slightly bigger than mine.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-36",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Significantly / Considerably",
+    "meaning": "بشكل ملحوظ / بدرجة كبيرة",
+    "example": "The new flat is considerably cheaper.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-37",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Way / Miles",
+    "meaning": "بكثير / بمراحل",
+    "example": "This house is miles better than the old one.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-38",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Nowhere near / Nothing like",
+    "meaning": "ليس قريبًا إطلاقًا من / لا يشبه",
+    "example": "The room is nowhere near as small as I expected.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-39",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Compared with / In comparison with",
+    "meaning": "بالمقارنة مع",
+    "example": "Compared with Cairo, Amman is smaller.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-40",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Comparing and Contrasting",
+    "term": "Whereas",
+    "meaning": "بينما / في حين أن",
+    "example": "This flat is cheap, whereas that one is expensive.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-41",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Littering",
+    "meaning": "إلقاء النفايات",
+    "example": "Littering is forbidden in many places.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-42",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Punctuality",
+    "meaning": "الالتزام بالمواعيد",
+    "example": "Punctuality is important at work.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-43",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Advisable",
+    "meaning": "مستحسن / يُنصح به",
+    "example": "It is advisable to check the rules first.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-44",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Vital / Essential",
+    "meaning": "ضروري جدًا / حيوي",
+    "example": "Clean water is vital for life.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-45",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Renovation",
+    "meaning": "تجديد / ترميم",
+    "example": "The house needs renovation.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-46",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Cushions",
+    "meaning": "وسائد",
+    "example": "The cushions do not go with the sofa.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-47",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Reading, Writing and Life Skills",
+    "term": "Vast majority",
+    "meaning": "الغالبية العظمى",
+    "example": "The vast majority of students passed.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u06-48",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "be supposed to",
+    "meaning": "من المفترض أن",
+    "example": "You are supposed to switch off the lights before leaving.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-49",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "permitted",
+    "meaning": "مسموح",
+    "example": "Only local residents are permitted to park here.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-50",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "forbidden",
+    "meaning": "ممنوع",
+    "example": "Smoking is forbidden inside the building.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-51",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "required to",
+    "meaning": "مطلوب / ملزم أن",
+    "example": "People driving a car are required to carry a driving licence.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-52",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "obliged to",
+    "meaning": "مجبَر / ملزم أن",
+    "example": "Students are obliged to follow the hostel rules.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-53",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "succeed in",
+    "meaning": "ينجح في",
+    "example": "The city succeeded in reducing traffic significantly.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-54",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "manage to",
+    "meaning": "يتمكن من",
+    "example": "The police managed to find the child in time.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-55",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "fix / repair",
+    "meaning": "يصلح",
+    "example": "Can you fix the leaking pipe?",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u06-56",
+    "unit": "06",
+    "unitTitle": "Unit 06",
+    "section": "Modal Related Forms - Filtered Additions",
+    "term": "shrink",
+    "meaning": "ينكمش",
+    "example": "My sweater shrank in the wash.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-1",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Fresh water supplies",
+    "meaning": "إمدادات المياه العذبة",
+    "example": "Chemicals can contaminate fresh water supplies.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-2",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Install water filters",
+    "meaning": "تركيب فلاتر المياه",
+    "example": "The group wanted to install water filters in the school.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-3",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Contaminate",
+    "meaning": "يلوّث",
+    "example": "Dirty pipes can contaminate drinking water.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-4",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Broken pipes",
+    "meaning": "أنابيب مكسورة",
+    "example": "Broken pipes caused a water shortage.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-5",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Natural disasters",
+    "meaning": "كوارث طبيعية",
+    "example": "Natural disasters can destroy homes.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-6",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "Provide",
+    "meaning": "يزود / يقدم",
+    "example": "The charity provides clean water.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-7",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "install new toilets",
+    "meaning": "يركب مراحيض جديدة",
+    "example": "The charity helped install new toilets in the village.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-8",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Charity and Water Supplies",
+    "term": "provide water filters",
+    "meaning": "يوفر فلاتر مياه",
+    "example": "The organisation provides water filters for poor communities.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-9",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Poverty",
+    "meaning": "الفقر",
+    "example": "Poverty affects many families.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-10",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Homelessness",
+    "meaning": "التشرد",
+    "example": "Homelessness is a serious social issue.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-11",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Unemployment",
+    "meaning": "البطالة",
+    "example": "Unemployment can lead to poverty.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-12",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Gender equality",
+    "meaning": "المساواة بين الجنسين",
+    "example": "Gender equality means equal rights for men and women.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-13",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Immigration",
+    "meaning": "الهجرة",
+    "example": "Immigration is often discussed in documentaries.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-14",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Racism",
+    "meaning": "العنصرية",
+    "example": "Racism should not be accepted.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-15",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Environmental problems",
+    "meaning": "المشكلات البيئية",
+    "example": "Air pollution is one of the environmental problems.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-16",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Facilities",
+    "meaning": "مرافق / منشآت",
+    "example": "The school needs better facilities.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-17",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Social Issues",
+    "term": "Opportunities",
+    "meaning": "فرص",
+    "example": "Education gives people more opportunities.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-18",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Enforce → Enforcement → Enforceable",
+    "meaning": "ينفذ القانون → تنفيذ → قابل للتنفيذ",
+    "example": "The law is enforceable in all cities.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-19",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Equalise → Equality → Equal",
+    "meaning": "يساوي → مساواة → متساوٍ",
+    "example": "All people are equal under the law.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-20",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Expand → Expansion → Expansive",
+    "meaning": "يوسع → توسع → واسع",
+    "example": "The expansion of services helped the village.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-21",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Discriminate → Discrimination → Discriminatory",
+    "meaning": "يميز ضد → تمييز → تمييزي",
+    "example": "Discrimination is unfair.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-22",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Institutionalise → Institution → Institutionalised",
+    "meaning": "يؤسس / يطبع مؤسسيًا → مؤسسة → مؤسسي",
+    "example": "The institution supports poor families.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-23",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Word Building",
+    "term": "Justify → Justification → Justifiable / Justified",
+    "meaning": "يبرر → تبرير → مبرر",
+    "example": "His decision was justified.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-24",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Industrious",
+    "meaning": "مجد / كادح",
+    "example": "She is an industrious student.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-25",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Commission",
+    "meaning": "عمولة",
+    "example": "The salesman earns a commission.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-26",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Intern",
+    "meaning": "متدرب",
+    "example": "He worked as an intern for six months.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-27",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Integral",
+    "meaning": "أساسي / جزء لا يتجزأ",
+    "example": "Volunteers are an integral part of the project.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-28",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Ill-equipped",
+    "meaning": "غير مجهز",
+    "example": "The small clinic was ill-equipped.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-29",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Anonymous",
+    "meaning": "مجهول الهوية",
+    "example": "An anonymous donor gave money to the school.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-30",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Proceeds",
+    "meaning": "عائدات / أرباح",
+    "example": "The proceeds went to charity.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-31",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Foundation",
+    "meaning": "مؤسسة خيرية أو تمويلية",
+    "example": "The foundation supports education.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-32",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Fund-raising",
+    "meaning": "جمع التبرعات",
+    "example": "They organised a fund-raising event.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-33",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Gesture",
+    "meaning": "لفتة / بادرة",
+    "example": "Buying him lunch was a kind gesture.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-34",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Kindness and Reading Vocabulary",
+    "term": "Track down",
+    "meaning": "يعثر على / يقتفي أثر",
+    "example": "The journalist tracked down the donor.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-35",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Admit",
+    "meaning": "يعترف",
+    "example": "He admitted making a mistake.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-36",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Criticise",
+    "meaning": "ينتقد",
+    "example": "The article criticised the company.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-37",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Deny",
+    "meaning": "ينكر",
+    "example": "She denied breaking the window.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-38",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Warn",
+    "meaning": "يحذر",
+    "example": "The teacher warned us about the test.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-39",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Persuade",
+    "meaning": "يقنع",
+    "example": "They persuaded him to volunteer.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-40",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Accuse somebody of",
+    "meaning": "يتهم شخصًا بـ",
+    "example": "They accused him of lying.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-41",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Apologise for",
+    "meaning": "يعتذر عن",
+    "example": "He apologised for arriving late.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-42",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "Praise somebody for",
+    "meaning": "يمدح شخصًا على",
+    "example": "The police praised Imad for saving the man.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-43",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "advise somebody to",
+    "meaning": "ينصح شخصًا أن",
+    "example": "The teacher advised us to read the question carefully.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-44",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "remind somebody to",
+    "meaning": "يذكّر شخصًا أن",
+    "example": "She reminded me to donate to the charity.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-45",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "encourage somebody to",
+    "meaning": "يشجع شخصًا أن",
+    "example": "The campaign encouraged people to volunteer.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-46",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "offer to",
+    "meaning": "يعرض أن",
+    "example": "He offered to help the homeless shelter.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-47",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "refuse to",
+    "meaning": "يرفض أن",
+    "example": "The company refused to admit the mistake.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-48",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "suggest + -ing / that",
+    "meaning": "يقترح",
+    "example": "She suggested organising a fund-raising event.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-49",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "recommend + -ing / that",
+    "meaning": "يوصي / ينصح بـ",
+    "example": "The report recommended improving local facilities.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-50",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "regret + -ing",
+    "meaning": "يندم على فعل شيء",
+    "example": "He regretted ignoring the warning.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-51",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Reporting Verbs",
+    "term": "deny + -ing",
+    "meaning": "ينكر فعل شيء",
+    "example": "Adel denied stealing the necklace.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-52",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Live on",
+    "meaning": "يعيش على نوع طعام أو مال",
+    "example": "Some families live on very little money.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-53",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Live in",
+    "meaning": "يعيش في مكان",
+    "example": "They live in a small village.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-54",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Eat out of",
+    "meaning": "يأكل من وعاء",
+    "example": "The child ate soup out of a bowl.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-55",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Deal with",
+    "meaning": "يتعامل مع",
+    "example": "The charity deals with poverty.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-56",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Participate in",
+    "meaning": "يشارك في",
+    "example": "Students participated in the campaign.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-57",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Protect against",
+    "meaning": "يحمي من / ضد",
+    "example": "Filters protect against dirty water.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-58",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "Learn from",
+    "meaning": "يتعلم من",
+    "example": "We can learn from our mistakes.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u07-59",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "object to + -ing",
+    "meaning": "يعترض على فعل شيء",
+    "example": "Some residents objected to building the new road.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-60",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "insist on + -ing",
+    "meaning": "يصر على فعل شيء",
+    "example": "The activists insisted on protecting the beach.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-61",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "congratulate somebody on",
+    "meaning": "يهنئ شخصًا على",
+    "example": "They congratulated her on winning the award.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-62",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "warn somebody against/about",
+    "meaning": "يحذر شخصًا من / بشأن",
+    "example": "The doctor warned people against drinking contaminated water.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u07-63",
+    "unit": "07",
+    "unitTitle": "Unit 07",
+    "section": "Verbs with Prepositions",
+    "term": "criticise somebody for",
+    "meaning": "ينتقد شخصًا بسبب",
+    "example": "The journalist criticised the company for ignoring poverty.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-1",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Smart devices",
+    "meaning": "الأجهزة الذكية",
+    "example": "Smart devices can collect data.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-2",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Household appliance",
+    "meaning": "جهاز منزلي",
+    "example": "A fridge is a household appliance.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-3",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Wearables",
+    "meaning": "أجهزة قابلة للارتداء",
+    "example": "Smartwatches are wearables.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-4",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Sensors",
+    "meaning": "حساسات / أجهزة استشعار",
+    "example": "Sensors can track heart rate.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-5",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Embedded",
+    "meaning": "مدمج",
+    "example": "Tiny sensors are embedded in the device.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-6",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Facial recognition software",
+    "meaning": "برنامج التعرف على الوجه",
+    "example": "Facial recognition software can identify people.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-7",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Hack / hack into something",
+    "meaning": "يخترق إلكترونيًا",
+    "example": "Hackers tried to hack into the system.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-8",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Malfunction",
+    "meaning": "عطل / خلل في التشغيل",
+    "example": "The machine may malfunction if it gets too hot.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-9",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Alert",
+    "meaning": "ينبّه / يحذر",
+    "example": "The device alerts you when your heart rate is high.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-10",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "The Internet of Things",
+    "term": "Track",
+    "meaning": "يتتبع",
+    "example": "The app tracks your daily steps.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-11",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "Increased / Rose / Grew / Went up",
+    "meaning": "ارتفع / نما / زاد",
+    "example": "The number of users went up last year.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-12",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "Declined / Decreased / Went down / Dropped",
+    "meaning": "انخفض / هبط",
+    "example": "Sales declined slightly in 2024.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-13",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "Slightly / Gradually",
+    "meaning": "بشكل طفيف / تدريجيًا",
+    "example": "The figure increased gradually.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-14",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "Sharply / Steadily / Dramatically",
+    "meaning": "بشكل حاد / بثبات / بشكل كبير",
+    "example": "Downloads rose sharply in March.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-15",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "Stayed the same / Remained steady",
+    "meaning": "بقي على حاله / ظل مستقرًا",
+    "example": "The percentage remained steady.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-16",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "decline",
+    "meaning": "انخفاض / ينخفض",
+    "example": "The number of users declined slightly last year.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-17",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "growth",
+    "meaning": "نمو",
+    "example": "The chart shows steady growth in online shopping.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-18",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "overall",
+    "meaning": "بشكل عام / إجمالي",
+    "example": "Overall, the use of smart devices has increased.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-19",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Describing Trends",
+    "term": "illustrate",
+    "meaning": "يوضح / يبيّن",
+    "example": "The graph illustrates changes in Internet use.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-20",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Early adopter",
+    "meaning": "مبادر يستخدم التقنية الجديدة مبكرًا",
+    "example": "Early adopters often buy the latest phones.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-21",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Laggard",
+    "meaning": "شخص متأخر في استخدام التقنية",
+    "example": "A laggard avoids new technology.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-22",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "State-of-the-art",
+    "meaning": "متطور جدًا / أحدث ما توصل إليه العلم",
+    "example": "The hospital uses state-of-the-art technology.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-23",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Outdated / Dated / Old-fashioned",
+    "meaning": "قديم / طراز قديم",
+    "example": "This old-fashioned phone has a cable.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-24",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Obsolete",
+    "meaning": "لم يعد مستخدمًا لظهور الأحدث",
+    "example": "DVD players are almost obsolete now.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-25",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Upgrade",
+    "meaning": "يرقي / يحدث",
+    "example": "You should upgrade your software.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-26",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Functionality",
+    "meaning": "الوظائف والخصائص",
+    "example": "The app has limited functionality.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-27",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Compatibility issues",
+    "meaning": "مشكلات التوافق",
+    "example": "The program has compatibility issues with my laptop.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-28",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Bugs / Glitches",
+    "meaning": "أخطاء برمجية / أعطال بسيطة",
+    "example": "The update fixed several bugs.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-29",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "Backed up / back up",
+    "meaning": "محفوظ بنسخة احتياطية / يعمل نسخة",
+    "example": "I backed up my photos yesterday.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-30",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "gadget",
+    "meaning": "جهاز صغير / أداة تقنية",
+    "example": "This gadget can track your heart rate.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-31",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "handle",
+    "meaning": "يتعامل مع / يتحمل",
+    "example": "The new software can handle large amounts of data.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-32",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Technology Synonyms",
+    "term": "latest",
+    "meaning": "الأحدث",
+    "example": "Many early adopters buy the latest technology.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u08-33",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Virtual Reality (VR)",
+    "meaning": "الواقع الافتراضي",
+    "example": "Virtual Reality can create realistic experiences.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-34",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Sensory overload",
+    "meaning": "تحميل / إرهاق حسي زائد",
+    "example": "VR can cause sensory overload for some users.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-35",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Meltdown",
+    "meaning": "انهيار عصبي أو عاطفي",
+    "example": "The child had a meltdown in the crowded room.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-36",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Computer-generated simulation",
+    "meaning": "محاكاة منشأة بواسطة الكمبيوتر",
+    "example": "VR is a computer-generated simulation.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-37",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Shrug it off",
+    "meaning": "يتجاهل الأمر / لا يبالي",
+    "example": "He tried to shrug it off and continue.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-38",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Carry on",
+    "meaning": "يستمر في",
+    "example": "She carried on working despite the problem.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-39",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Bump into",
+    "meaning": "يلتقي بشخص مصادفة",
+    "example": "I bumped into my friend at the mall.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-40",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Fit in with",
+    "meaning": "ينسجم / يتكيف مع",
+    "example": "He found it hard to fit in with the group.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-41",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Hold down a job",
+    "meaning": "يحافظ على وظيفة",
+    "example": "He managed to hold down a job.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-42",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Come across as",
+    "meaning": "يبدو للآخرين بصورة معينة",
+    "example": "He came across as confident.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-43",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Break off",
+    "meaning": "يقطع / يتوقف فجأة",
+    "example": "She broke off the conversation.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-44",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Virtual Reality and Phrasal Verbs",
+    "term": "Come up against",
+    "meaning": "يواجه صعوبات",
+    "example": "They came up against many problems.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-45",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Flattering",
+    "meaning": "يُظهر الشخص بشكل جميل",
+    "example": "This photo is very flattering.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-46",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Flaws",
+    "meaning": "عيوب / نواقص",
+    "example": "Filters can hide flaws.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-47",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Curate",
+    "meaning": "ينظم ويختار بعناية",
+    "example": "People curate their online image.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-48",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Enhance",
+    "meaning": "يحسن / يطور",
+    "example": "Editing can enhance a photo.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-49",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Deceptive",
+    "meaning": "مخادع / مضلل",
+    "example": "Some online images are deceptive.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-50",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Superficial",
+    "meaning": "سطحي",
+    "example": "Social media can encourage superficial judgements.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-51",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "Attributes / Features",
+    "meaning": "سمات / ملامح",
+    "example": "Kindness is an important attribute.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u08-52",
+    "unit": "08",
+    "unitTitle": "Unit 08",
+    "section": "Selfies and Personal Image",
+    "term": "attribute",
+    "meaning": "سمة / صفة",
+    "example": "Confidence is a useful personal attribute.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-1",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Affluent",
+    "meaning": "غني / ميسور الحال",
+    "example": "Affluent families can afford expensive schools.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-2",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Well-off",
+    "meaning": "ميسور الماديات",
+    "example": "She comes from a well-off family.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-3",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Costly",
+    "meaning": "مكلف / باهظ الثمن",
+    "example": "The mistake was costly.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-4",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Extravagant",
+    "meaning": "مبذر / مبالغ فيه",
+    "example": "Buying five cars is extravagant.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-5",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Lucrative",
+    "meaning": "مربح / مدر للمال",
+    "example": "Programming can be a lucrative career.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-6",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Splash out",
+    "meaning": "يصرف ببذخ",
+    "example": "He splashed out on a new phone.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-7",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Blunder",
+    "meaning": "خطأ فادح",
+    "example": "Forgetting the answer was a terrible blunder.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-8",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Flop",
+    "meaning": "فشل ذريع",
+    "example": "The film was a flop.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-9",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Flourish",
+    "meaning": "يزدهر / ينمو بنجاح",
+    "example": "The business began to flourish.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-10",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Get nowhere",
+    "meaning": "لا يصل إلى نتيجة",
+    "example": "We argued for hours but got nowhere.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-11",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Masterstroke",
+    "meaning": "ضربة معلم / خطوة عبقرية",
+    "example": "Changing the plan was a masterstroke.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-12",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Mess up",
+    "meaning": "يخبص / يفسد الأمر",
+    "example": "I messed up the last question.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-13",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Pay off",
+    "meaning": "يؤتي ثماره",
+    "example": "Her hard work paid off.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-14",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Success, Failure and Money",
+    "term": "Setback",
+    "meaning": "نكسة / عقبة مفاجئة",
+    "example": "The injury was a major setback.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-15",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Ups and downs",
+    "meaning": "تقلبات الحياة",
+    "example": "Every career has ups and downs.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-16",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Give or take / give and take",
+    "meaning": "تقريبًا أو تنازل وتفاهم حسب السياق",
+    "example": "Good teamwork needs give and take.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-17",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "More or less",
+    "meaning": "تقريبًا / إلى حد ما",
+    "example": "The two boys were more or less the same age.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-18",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Pick or choose / pick and choose",
+    "meaning": "ينتقي على مزاجه",
+    "example": "You cannot pick and choose only the easy jobs.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-19",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Safe and sound",
+    "meaning": "سالمًا معافى",
+    "example": "The children arrived home safe and sound.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-20",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Take it or leave it",
+    "meaning": "خذها أو اتركها",
+    "example": "This is my final offer; take it or leave it.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-21",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "There and then",
+    "meaning": "في نفس اللحظة / فورًا",
+    "example": "He decided there and then to change his life.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-22",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Touch-and-go",
+    "meaning": "غير مؤكد / محفوف بالمخاطر",
+    "example": "It was touch-and-go whether he would survive.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-23",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "Sooner or later",
+    "meaning": "عاجلًا أم آجلًا",
+    "example": "Sooner or later, you will have to decide.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-24",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "highs and lows",
+    "meaning": "فترات النجاح والفشل",
+    "example": "Everyone goes through highs and lows in life.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-25",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "peace and quiet",
+    "meaning": "هدوء وسكينة",
+    "example": "After a stressful week, I need some peace and quiet.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-26",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Binomials",
+    "term": "slowly but surely",
+    "meaning": "ببطء لكن بثبات",
+    "example": "Slowly but surely, she improved her English.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-27",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "Risk",
+    "meaning": "مخاطرة / احتمال حدوث ضرر",
+    "example": "Climbing without equipment is a big risk.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-28",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "Chance",
+    "meaning": "فرصة / صدفة",
+    "example": "I had a chance to meet the manager.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-29",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "Opportunity",
+    "meaning": "فرصة مناسبة لفعل شيء تريده",
+    "example": "Education gives people better opportunities.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-30",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "Luck",
+    "meaning": "الحظ",
+    "example": "He passed the test by luck.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-31",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "worth the risk",
+    "meaning": "يستحق المخاطرة",
+    "example": "Climbing the mountain was dangerous, but it was worth the risk.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-32",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "run the risk of",
+    "meaning": "يخاطر بـ / يعرّض نفسه لخطر",
+    "example": "If you ignore safety rules, you run the risk of injury.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-33",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "lucky break",
+    "meaning": "ضربة حظ / فرصة حظ",
+    "example": "Getting that job was his lucky break.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-34",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "given the chance",
+    "meaning": "إذا أُعطي الفرصة",
+    "example": "Given the chance, I would study abroad.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-35",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "grab the chance",
+    "meaning": "يغتنم الفرصة بسرعة",
+    "example": "When the opportunity came, she grabbed the chance.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-36",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Easily Confused Words",
+    "term": "take the chance / opportunity to do something",
+    "meaning": "يستغل الفرصة ليفعل شيئًا",
+    "example": "He took the opportunity to thank his teachers.",
+    "source": "إضافة مفلترة"
+  },
+  {
+    "id": "u09-37",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Go through the ordeal",
+    "meaning": "يمر بتجربة مريرة",
+    "example": "He went through a terrible ordeal at sea.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-38",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Get off relatively lightly",
+    "meaning": "ينجو بأقل الأضرار",
+    "example": "He got off relatively lightly after the accident.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-39",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Had no choice but to",
+    "meaning": "لم يكن أمامه خيار سوى أن",
+    "example": "He had no choice but to wait for help.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-40",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Done the trick",
+    "meaning": "أدى الغرض / نجحت الخطة",
+    "example": "The simple repair did the trick.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-41",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Take his mind off something",
+    "meaning": "يلهي نفسه عن شيء مقلق",
+    "example": "He sang songs to take his mind off hunger.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-42",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Took its toll on someone",
+    "meaning": "أثر عليه سلبًا / أرهقه",
+    "example": "The long journey took its toll on him.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-43",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Kept him going",
+    "meaning": "أبقاه مستمرًا / منحه القوة",
+    "example": "Hope kept him going.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-44",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Considered his options",
+    "meaning": "درس خياراته",
+    "example": "He considered his options carefully.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-45",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Wasn't worth the risk",
+    "meaning": "لا يستحق المخاطرة",
+    "example": "Swimming to the ship wasn’t worth the risk.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-46",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Took it for granted",
+    "meaning": "اعتبر الأمر مسلمًا به",
+    "example": "He took clean water for granted before the ordeal.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-47",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Got his lucky break",
+    "meaning": "نال فرصة حظ",
+    "example": "He got his lucky break when a ship appeared.",
+    "source": "من قائمتك"
+  },
+  {
+    "id": "u09-48",
+    "unit": "09",
+    "unitTitle": "Unit 09",
+    "section": "Resilience Stories",
+    "term": "Make himself understood",
+    "meaning": "يجعل الآخرين يفهمونه",
+    "example": "He used gestures to make himself understood.",
+    "source": "من قائمتك"
+  }
+];</script>
+  <script>
+const state = { questions: [], index: 0, score: 0, answered: false, mistakes: [] };
+const STORAGE_KEY = "vocabExamClozeVariantTracker_v3";
+
+function loadTracker() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+  catch { return {}; }
+}
+function saveTracker(tracker) { localStorage.setItem(STORAGE_KEY, JSON.stringify(tracker)); }
+
+function shuffle(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function cleanTerm(term) {
+  return String(term).replace(/<br>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function mainTerm(term) {
+  const t = cleanTerm(term);
+  if (t.includes("→")) return t.split("→")[0].trim();
+  return t.split(" / ")[0].split("/")[0].trim() || t;
+}
+
+function escapeRegExp(text) {
+  return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normaliseForDisplay(text) {
+  return String(text).replace(/\s*→\s*/g, " → ").replace(/\s+/g, " ").trim();
+}
+
+function findSurfaceAnswer(item) {
+  const example = item.example || "";
+  const term = cleanTerm(item.term);
+  const candidates = [];
+
+  candidates.push(term);
+  candidates.push(mainTerm(term));
+  term.split(/[\/]/).forEach(x => { if (x.trim()) candidates.push(x.trim()); });
+  term.split("→").forEach(x => { if (x.trim()) candidates.push(x.trim()); });
+  candidates.push(term.replace(/\([^)]*\)/g, "").trim());
+
+  for (const c of candidates) {
+    if (!c || c.length < 2) continue;
+    const re = new RegExp(`\\b${escapeRegExp(c)}\\b`, "i");
+    const m = example.match(re);
+    if (m) return m[0];
+  }
+
+  const base = mainTerm(term).toLowerCase();
+  const words = base.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) {
+    const firstStem = words[0].replace(/e$/, "");
+    const rest = words.slice(1).map(escapeRegExp).join("\\s+");
+    const re = new RegExp(`\\b${escapeRegExp(firstStem)}(?:e?s|ed|ing|ied)?\\s+${rest}\\b`, "i");
+    const m = example.match(re);
+    if (m) return m[0];
+  }
+
+  return mainTerm(term);
+}
+
+function blankAnswerInExample(item) {
+  const example = item.example || "";
+  const answer = findSurfaceAnswer(item);
+
+  if (answer && example) {
+    const re = new RegExp(escapeRegExp(answer), "i");
+    if (re.test(example)) {
+      return { sentence: example.replace(re, "__________"), answerText: answer };
+    }
+  }
+
+  return {
+    sentence: `${example} Choose the best word or phrase: __________.`,
+    answerText: mainTerm(item.term)
+  };
+}
+
+function makeClozeSentence(item, variant) {
+  const base = blankAnswerInExample(item);
+
+  if (variant === 0) {
+    return {
+      title: "سؤال وزاري - إكمال فراغ",
+      sentence: base.sentence,
+      answerText: base.answerText
+    };
+  }
+
+  if (variant === 1) {
+    return {
+      title: "سؤال وزاري - سياق أصعب",
+      sentence: `Read the context carefully; the answer depends on meaning and collocation. ${base.sentence}`,
+      answerText: base.answerText
+    };
+  }
+
+  return {
+    title: "سؤال وزاري - خيارات متقاربة",
+    sentence: `Only one option fits the sentence naturally. ${base.sentence}`,
+    answerText: base.answerText
+  };
+}
+
+function answerForOptions(item) {
+  return mainTerm(item.term);
+}
+
+function detectType(term) {
+  const t = cleanTerm(term).toLowerCase();
+  if (t.includes("→")) return "word-family";
+  if (t.includes("somebody") || t.includes("something")) return "pattern";
+  if (t.split(/\s+/).length >= 2) return "phrase";
+  return "word";
+}
+
+function pickDistractors(item, pool, count = 3) {
+  const correct = answerForOptions(item);
+  const type = detectType(item.term);
+
+  const sameSectionType = shuffle(pool.filter(x => x.id !== item.id && x.section === item.section && detectType(x.term) === type));
+  const sameUnitType = shuffle(pool.filter(x => x.id !== item.id && x.unit === item.unit && detectType(x.term) === type));
+  const sameSectionAny = shuffle(pool.filter(x => x.id !== item.id && x.section === item.section));
+  const sameUnitAny = shuffle(pool.filter(x => x.id !== item.id && x.unit === item.unit));
+  const all = shuffle(pool.filter(x => x.id !== item.id));
+
+  const chosen = [];
+  for (const x of [...sameSectionType, ...sameUnitType, ...sameSectionAny, ...sameUnitAny, ...all]) {
+    const val = answerForOptions(x);
+    if (val && val !== correct && !chosen.includes(val)) chosen.push(val);
+    if (chosen.length === count) break;
+  }
+  return chosen;
+}
+
+function optionsWithAnswer(answer, distractors) {
+  return shuffle([answer, ...distractors.slice(0, 3)]);
+}
+
+function meaningOfOption(option) {
+  const found = VOCAB_ITEMS.find(x => answerForOptions(x) === option || cleanTerm(x.term) === option);
+  return found ? found.meaning : "معناه مختلف عن سياق الجملة";
+}
+
+function explainQuestion(q, selected, isCorrect) {
+  const correctMeaning = q.item.meaning;
+  const correctTerm = answerForOptions(q.item);
+  const selectedMeaning = meaningOfOption(selected);
+
+  if (isCorrect) {
+    return `صح ✅ الإجابة هي "${correctTerm}" لأن معناها: ${correctMeaning}. سياق الجملة يطلب هذا المعنى تحديدًا، وباقي الخيارات قريبة بالموضوع أو الشكل لكنها لا تكمل الجملة طبيعيًا.`;
+  }
+
+  return `خطأ ❌ الإجابة الصحيحة هي "${correctTerm}" لأن معناها: ${correctMeaning}. اختيارك "${selected}" لا يناسب السياق لأن معناه: ${selectedMeaning}. لذلك الجملة تحتاج "${correctTerm}" وليس "${selected}".`;
+}
+
+function buildQuestions(selectedUnit, limit) {
+  const pool = selectedUnit === "all" ? VOCAB_ITEMS : VOCAB_ITEMS.filter(item => item.unit === selectedUnit);
+  const tracker = loadTracker();
+  const questions = [];
+
+  shuffle(pool).forEach(item => {
+    const last = typeof tracker[item.id] === "number" ? tracker[item.id] : -1;
+    const nextVariant = last === -1 ? Math.floor(Math.random() * 3) : (last + 1) % 3;
+    tracker[item.id] = nextVariant;
+
+    const cloze = makeClozeSentence(item, nextVariant);
+    const answer = answerForOptions(item);
+
+    questions.push({
+      item,
+      variant: nextVariant,
+      title: cloze.title,
+      question: `Complete the sentence with the correct word or phrase:\n${cloze.sentence}`,
+      answer,
+      options: optionsWithAnswer(answer, pickDistractors(item, pool)),
+      surfaceAnswer: cloze.answerText
+    });
+  });
+
+  saveTracker(tracker);
+  return shuffle(questions).slice(0, limit);
+}
+
+function renderQuestion() {
+  const q = state.questions[state.index];
+  const questionArea = document.getElementById("questionArea");
+  const optionsGrid = document.getElementById("optionsGrid");
+  const feedback = document.getElementById("feedback");
+
+  state.answered = false;
+  feedback.className = "feedback";
+  feedback.textContent = "";
+
+  document.getElementById("questionNumber").textContent = state.index + 1;
+  document.getElementById("totalQuestions").textContent = state.questions.length;
+  document.getElementById("scoreValue").textContent = state.score;
+  document.getElementById("progressFill").style.width = `${(state.index / state.questions.length) * 100}%`;
+
+  questionArea.innerHTML = `
+    <p class="question-title">${q.title}</p>
+    <p class="question-text">${q.question.replace(/\n/g, "<br>")}</p>
+    <div class="question-meta">
+      <span class="badge">${q.item.unitTitle}</span>
+      <span class="badge">${q.item.section}</span>
+      <span class="badge">صيغة ${q.variant + 1}/3</span>
+    </div>
+  `;
+
+  optionsGrid.innerHTML = "";
+  q.options.forEach((option, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.type = "button";
+    btn.innerHTML = `<strong>${["A", "B", "C", "D"][idx]}.</strong> ${normaliseForDisplay(option)}`;
+    btn.addEventListener("click", () => answerQuestion(option, btn));
+    optionsGrid.appendChild(btn);
+  });
+}
+
+function answerQuestion(selected, btn) {
+  if (state.answered) return;
+  state.answered = true;
+
+  const q = state.questions[state.index];
+  const isCorrect = selected === q.answer;
+  const buttons = document.querySelectorAll(".option");
+
+  buttons.forEach(b => {
+    b.classList.add("disabled");
+    if (b.textContent.includes(q.answer)) b.classList.add("correct");
+  });
+
+  const explanation = explainQuestion(q, selected, isCorrect);
+
+  if (isCorrect) {
+    state.score++;
+    btn.classList.add("correct");
+  } else {
+    btn.classList.add("wrong");
+    state.mistakes.push({
+      question: q.question,
+      selected,
+      correct: q.answer,
+      term: cleanTerm(q.item.term),
+      unit: q.item.unitTitle,
+      explain: explanation
+    });
+  }
+
+  document.getElementById("scoreValue").textContent = state.score;
+  const feedback = document.getElementById("feedback");
+  feedback.className = `feedback show ${isCorrect ? "correct" : "wrong"}`;
+  feedback.textContent = explanation;
+}
+
+function nextQuestion() {
+  if (!state.questions.length) return;
+  if (state.index < state.questions.length - 1) {
+    state.index++;
+    renderQuestion();
+  } else {
+    finishExam();
+  }
+}
+
+function finishExam() {
+  document.getElementById("progressFill").style.width = "100%";
+  document.getElementById("questionArea").innerHTML = `
+    <p class="question-title">انتهى الامتحان</p>
+    <p class="question-text">نتيجتك: ${state.score} من ${state.questions.length}</p>
+  `;
+  document.getElementById("optionsGrid").innerHTML = "";
+  document.getElementById("feedback").className = "feedback";
+
+  const box = document.getElementById("mistakesBox");
+  if (!state.mistakes.length) {
+    box.innerHTML = `<div class="note-box">ممتاز! ما عندك أخطاء بهذا الامتحان ✅</div>`;
+    return;
+  }
+
+  box.innerHTML = `<div class="mistakes-list">` + state.mistakes.map(m => `
+    <div class="mistake-item">
+      <strong>${m.unit} - ${m.term}</strong><br>
+      <span>السؤال: ${m.question}</span><br>
+      <span>إجابتك: ${m.selected}</span><br>
+      <span>الصحيح: ${m.correct}</span><br>
+      <small>${m.explain}</small>
+    </div>
+  `).join("") + `</div>`;
+}
+
+function startExam() {
+  const selectedUnit = document.getElementById("examUnit").value;
+  const limitValue = document.getElementById("questionLimit").value;
+  const limit = limitValue === "all" ? 9999 : Number(limitValue);
+
+  state.questions = buildQuestions(selectedUnit, limit);
+  state.index = 0;
+  state.score = 0;
+  state.answered = false;
+  state.mistakes = [];
+
+  document.getElementById("activeExamUnit").textContent = selectedUnit === "all" ? "كل الوحدات" : selectedUnit;
+  document.getElementById("mistakesBox").innerHTML = "هون رح يظهر تحليل الأخطاء بعد نهاية الامتحان";
+  renderQuestion();
+}
+
+function resetExam() {
+  state.questions = [];
+  state.index = 0;
+  state.score = 0;
+  state.answered = false;
+  state.mistakes = [];
+  document.getElementById("activeExamUnit").textContent = "-";
+  document.getElementById("questionNumber").textContent = "0";
+  document.getElementById("totalQuestions").textContent = "0";
+  document.getElementById("scoreValue").textContent = "0";
+  document.getElementById("progressFill").style.width = "0%";
+  document.getElementById("questionArea").textContent = "اضغط ابدأ الامتحان لتوليد أسئلة فراغ عشوائية";
+  document.getElementById("optionsGrid").innerHTML = `
+    <button class="option" type="button">A</button>
+    <button class="option" type="button">B</button>
+    <button class="option" type="button">C</button>
+    <button class="option" type="button">D</button>
+  `;
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("mistakesBox").innerHTML = "هون بنحط لاحقًا الأخطاء حسب الوحدة والكلمة ونوع السؤال";
+}
+
+function resetVariantMemory() {
+  localStorage.removeItem(STORAGE_KEY);
+  alert("تم تصفير ذاكرة أشكال الأسئلة. الامتحان القادم سيبدأ توزيع جديد.");
+}
+
+document.getElementById("startExamBtn").addEventListener("click", startExam);
+document.getElementById("resetExamBtn").addEventListener("click", resetExam);
+document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+document.getElementById("resetMemoryBtn").addEventListener("click", resetVariantMemory);
+</script>
+</body>
+</html>

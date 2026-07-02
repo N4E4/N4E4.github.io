@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>قسم المعاني</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>قسم المعاني</h1>
+    <p>كل وحدة بصفحة لحال ومعها المعاني الأصلية والمفلترة</p>
+  </header>
+  <div class="wrapper">
+    
+<aside class="side-nav" aria-label="التنقل الرئيسي">
+  <h2>الأقسام</h2>
+  <a class="nav-link " href="index.html">الرئيسية</a>
+  <a class="nav-link active" href="meanings.html">قسم المعاني</a>
+  <a class="nav-link " href="exams.html">قسم الامتحانات</a>
+</aside>
+
+    <main class="card">
+      <div class="section-head">
+        <div><h2>الوحدات</h2><span>اضغط على أي وحدة لفتح صفحتها الخاصة</span></div>
+        <span class="badge">8 وحدات</span>
+      </div>
+      <div class="tools-row">
+        <input class="tool-input" id="unitSearch" type="search" placeholder="بحث عن وحدة..." />
+      </div>
+      <div class="units-grid" id="unitsGrid">
+    <a class="unit-link" href="units/unit-01.html">
+      <div>
+        <strong>Unit 01</strong><br>
+        <small>Get the message</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-02.html">
+      <div>
+        <strong>Unit 02</strong><br>
+        <small>Looking ahead</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-04.html">
+      <div>
+        <strong>Unit 04</strong><br>
+        <small>Inside story</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-05.html">
+      <div>
+        <strong>Unit 05</strong><br>
+        <small>Making sense of the senses</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-06.html">
+      <div>
+        <strong>Unit 06</strong><br>
+        <small>Where we live</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-07.html">
+      <div>
+        <strong>Unit 07</strong><br>
+        <small>Is it fair?</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-08.html">
+      <div>
+        <strong>Unit 08</strong><br>
+        <small>Digital perspectives</small>
+      </div>
+      <span>↢</span>
+    </a>
+    
+
+    <a class="unit-link" href="units/unit-09.html">
+      <div>
+        <strong>Unit 09</strong><br>
+        <small>Highs and lows</small>
+      </div>
+      <span>↢</span>
+    </a>
+    </div>
+    </main>
+  </div>
+  <footer>قسم المعاني جاهز للتعديل</footer>
+  <script>
+    const input = document.getElementById("unitSearch");
+    const cards = document.querySelectorAll(".unit-link");
+    input.addEventListener("input", () => {
+      const term = input.value.trim().toLowerCase();
+      cards.forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(term) ? "flex" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
