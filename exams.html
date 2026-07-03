@@ -25,7 +25,7 @@
       <div class="section-head">
         <div>
           <h2>الامتحانات</h2>
-          <span>كل معنى إله 3 صيغ فراغ مختلفة، والخيارات المتشابهة جدًا تُستبعد حتى ما يصير أكثر من جواب صحيح</span>
+          <span>كل سؤال فيه فراغ واضح داخل الجملة، والخيارات المتشابهة جدًا تُستبعد حتى ما يصير أكثر من جواب صحيح</span>
         </div>
         <span class="badge">Cloze MCQ</span>
       </div>
@@ -4311,13 +4311,13 @@ const state = {
   mistakes: []
 };
 
-const STORAGE_KEY = "vocabExamClozeVariantTracker_fixed_v4";
+const STORAGE_KEY = "vocabExamClozeVariantTracker_fixed_v5";
 const MIN_MEANING_SIMILARITY_TO_BLOCK = 0.22;
 
 const STOP_WORDS = new Set([
   "the","and","or","to","of","in","on","for","with","a","an","somebody","something",
   "someone","into","from","about","up","off","out","down","over","be","being","been",
-  "is","are","was","were","has","have","had"
+  "is","are","was","were","has","have","had","am"
 ]);
 
 function loadTracker() {
@@ -4403,11 +4403,48 @@ function detectType(term) {
   return "word";
 }
 
+function beRest(term) {
+  const t = mainTerm(term).toLowerCase();
+  if (!t.startsWith("be ")) return null;
+  return t.replace(/^be\s+/, "").trim();
+}
+
+function findBeSurfaceInExample(item) {
+  const example = item.example || "";
+  const rest = beRest(item.term);
+  if (!rest) return null;
+
+  const restPattern = rest
+    .replace(/\+\s*-ing/gi, "")
+    .replace(/\+\s*infinitive/gi, "")
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/\s+/g, "\\s+");
+
+  const re = new RegExp(`\\b(am|is|are|was|were|be|been|being)\\s+${restPattern}\\b`, "i");
+  const m = example.match(re);
+  return m ? m[0] : null;
+}
+
+function findVerbSurfaceInExample(item) {
+  const example = item.example || "";
+  const term = mainTerm(item.term);
+  const first = term.split(/\s+/)[0].replace(/\+.*$/, "").trim();
+  if (!first || first.length < 4) return null;
+
+  const stem = first.replace(/e$/, "");
+  const re = new RegExp(`\\b${escapeRegExp(stem)}(?:e?s|ed|ing|ied)?\\b`, "i");
+  const m = example.match(re);
+  return m ? m[0] : null;
+}
+
 function findSurfaceAnswer(item) {
   const example = item.example || "";
   const term = cleanTerm(item.term);
-  const candidates = [];
 
+  const beSurface = findBeSurfaceInExample(item);
+  if (beSurface) return beSurface;
+
+  const candidates = [];
   candidates.push(term);
   candidates.push(mainTerm(term));
 
@@ -4440,7 +4477,10 @@ function findSurfaceAnswer(item) {
     if (m) return m[0];
   }
 
-  return mainTerm(term);
+  const verbSurface = findVerbSurfaceInExample(item);
+  if (verbSurface) return verbSurface;
+
+  return null;
 }
 
 function blankAnswerInExample(item) {
@@ -4457,8 +4497,10 @@ function blankAnswerInExample(item) {
     }
   }
 
+  // مهم: لا نعرض جملة كاملة بدون فراغ بعدين نحط فراغ آخر.
+  // إذا ما قدرنا نلاقي الكلمة داخل المثال، بنبني جملة فراغ واضحة بدل المثال القديم.
   return {
-    sentence: `${example} Complete the sentence: __________.`,
+    sentence: `The correct word or phrase is: __________.`,
     surfaceAnswer: mainTerm(item.term)
   };
 }
@@ -4489,12 +4531,24 @@ function makeClozeSentence(item, variant) {
   };
 }
 
+function getBeFormFromCorrectText(correctText) {
+  const m = String(correctText).match(/^(am|is|are|was|were|be|been|being)\s+/i);
+  return m ? m[1] : null;
+}
+
+function adaptDistractorToSurface(correctText, distractorItem) {
+  const beForm = getBeFormFromCorrectText(correctText);
+  const rest = beRest(distractorItem.term);
+  if (beForm && rest) return `${beForm} ${rest}`;
+  return mainTerm(distractorItem.term);
+}
+
 function optionTextForCorrect(item, surfaceAnswer) {
   return normaliseForDisplay(surfaceAnswer || mainTerm(item.term));
 }
 
-function optionTextForDistractor(item) {
-  return normaliseForDisplay(mainTerm(item.term));
+function optionTextForDistractor(item, correctText) {
+  return normaliseForDisplay(adaptDistractorToSurface(correctText, item));
 }
 
 function pickDistractors(correctItem, pool, correctText, count = 3) {
@@ -4514,7 +4568,7 @@ function pickDistractors(correctItem, pool, correctText, count = 3) {
   for (const group of groups) {
     for (const item of group) {
       if (isAmbiguousDistractor(correctItem, item)) continue;
-      const text = optionTextForDistractor(item);
+      const text = optionTextForDistractor(item, correctText);
       const key = text.toLowerCase();
       if (!text || used.has(key)) continue;
       chosen.push({ text, item });
