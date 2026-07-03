@@ -25,7 +25,7 @@
       <div class="section-head">
         <div>
           <h2>الامتحانات</h2>
-          <span>كل معنى إله 3 صيغ فراغ مختلفة، بدون أسئلة معنى مباشر</span>
+          <span>كل معنى إله 3 صيغ فراغ مختلفة، والخيارات المتشابهة جدًا تُستبعد حتى ما يصير أكثر من جواب صحيح</span>
         </div>
         <span class="badge">Cloze MCQ</span>
       </div>
@@ -4303,14 +4303,31 @@
   }
 ];</script>
   <script>
-const state = { questions: [], index: 0, score: 0, answered: false, mistakes: [] };
-const STORAGE_KEY = "vocabExamClozeVariantTracker_v3";
+const state = {
+  questions: [],
+  index: 0,
+  score: 0,
+  answered: false,
+  mistakes: []
+};
+
+const STORAGE_KEY = "vocabExamClozeVariantTracker_fixed_v4";
+const MIN_MEANING_SIMILARITY_TO_BLOCK = 0.22;
+
+const STOP_WORDS = new Set([
+  "the","and","or","to","of","in","on","for","with","a","an","somebody","something",
+  "someone","into","from","about","up","off","out","down","over","be","being","been",
+  "is","are","was","were","has","have","had"
+]);
 
 function loadTracker() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
   catch { return {}; }
 }
-function saveTracker(tracker) { localStorage.setItem(STORAGE_KEY, JSON.stringify(tracker)); }
+
+function saveTracker(tracker) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tracker));
+}
 
 function shuffle(array) {
   const arr = [...array];
@@ -4339,6 +4356,53 @@ function normaliseForDisplay(text) {
   return String(text).replace(/\s*→\s*/g, " → ").replace(/\s+/g, " ").trim();
 }
 
+function tokenise(text) {
+  return String(text)
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+    .split(/\s+/)
+    .map(t => t.trim())
+    .filter(t => t.length > 2 && !STOP_WORDS.has(t));
+}
+
+function jaccard(aText, bText) {
+  const a = new Set(tokenise(aText));
+  const b = new Set(tokenise(bText));
+  if (!a.size || !b.size) return 0;
+  let inter = 0;
+  for (const x of a) if (b.has(x)) inter++;
+  const union = new Set([...a, ...b]).size;
+  return inter / union;
+}
+
+function sharesImportantTermWord(a, b) {
+  const aWords = tokenise(cleanTerm(a.term)).filter(x => x.length >= 4);
+  const bWords = tokenise(cleanTerm(b.term)).filter(x => x.length >= 4);
+  return aWords.some(w => bWords.includes(w));
+}
+
+function isAmbiguousDistractor(correctItem, distractorItem) {
+  if (!distractorItem || correctItem.id === distractorItem.id) return true;
+
+  const correctTerm = cleanTerm(correctItem.term).toLowerCase();
+  const distractorTerm = cleanTerm(distractorItem.term).toLowerCase();
+  if (correctTerm === distractorTerm) return true;
+
+  if (jaccard(correctItem.meaning, distractorItem.meaning) >= MIN_MEANING_SIMILARITY_TO_BLOCK) return true;
+
+  if (correctItem.section === distractorItem.section && sharesImportantTermWord(correctItem, distractorItem)) return true;
+
+  return false;
+}
+
+function detectType(term) {
+  const t = cleanTerm(term).toLowerCase();
+  if (t.includes("→")) return "word-family";
+  if (t.includes("somebody") || t.includes("something")) return "pattern";
+  if (t.split(/\s+/).length >= 2) return "phrase";
+  return "word";
+}
+
 function findSurfaceAnswer(item) {
   const example = item.example || "";
   const term = cleanTerm(item.term);
@@ -4346,8 +4410,17 @@ function findSurfaceAnswer(item) {
 
   candidates.push(term);
   candidates.push(mainTerm(term));
-  term.split(/[\/]/).forEach(x => { if (x.trim()) candidates.push(x.trim()); });
-  term.split("→").forEach(x => { if (x.trim()) candidates.push(x.trim()); });
+
+  term.split(/[\/]/).forEach(x => {
+    const part = x.trim();
+    if (part) candidates.push(part);
+  });
+
+  term.split("→").forEach(x => {
+    const part = x.trim();
+    if (part) candidates.push(part);
+  });
+
   candidates.push(term.replace(/\([^)]*\)/g, "").trim());
 
   for (const c of candidates) {
@@ -4360,9 +4433,9 @@ function findSurfaceAnswer(item) {
   const base = mainTerm(term).toLowerCase();
   const words = base.split(/\s+/).filter(Boolean);
   if (words.length >= 2) {
-    const firstStem = words[0].replace(/e$/, "");
+    const first = words[0].replace(/e$/, "");
     const rest = words.slice(1).map(escapeRegExp).join("\\s+");
-    const re = new RegExp(`\\b${escapeRegExp(firstStem)}(?:e?s|ed|ing|ied)?\\s+${rest}\\b`, "i");
+    const re = new RegExp(`\\b${escapeRegExp(first)}(?:e?s|ed|ing|ied)?\\s+${rest}\\b`, "i");
     const m = example.match(re);
     if (m) return m[0];
   }
@@ -4372,18 +4445,21 @@ function findSurfaceAnswer(item) {
 
 function blankAnswerInExample(item) {
   const example = item.example || "";
-  const answer = findSurfaceAnswer(item);
+  const surfaceAnswer = findSurfaceAnswer(item);
 
-  if (answer && example) {
-    const re = new RegExp(escapeRegExp(answer), "i");
+  if (surfaceAnswer && example) {
+    const re = new RegExp(escapeRegExp(surfaceAnswer), "i");
     if (re.test(example)) {
-      return { sentence: example.replace(re, "__________"), answerText: answer };
+      return {
+        sentence: example.replace(re, "__________"),
+        surfaceAnswer
+      };
     }
   }
 
   return {
-    sentence: `${example} Choose the best word or phrase: __________.`,
-    answerText: mainTerm(item.term)
+    sentence: `${example} Complete the sentence: __________.`,
+    surfaceAnswer: mainTerm(item.term)
   };
 }
 
@@ -4394,75 +4470,102 @@ function makeClozeSentence(item, variant) {
     return {
       title: "سؤال وزاري - إكمال فراغ",
       sentence: base.sentence,
-      answerText: base.answerText
+      answerText: base.surfaceAnswer
     };
   }
 
   if (variant === 1) {
     return {
-      title: "سؤال وزاري - سياق أصعب",
-      sentence: `Read the context carefully; the answer depends on meaning and collocation. ${base.sentence}`,
-      answerText: base.answerText
+      title: "سؤال وزاري - انتبه للسياق",
+      sentence: `Read the whole sentence before choosing: ${base.sentence}`,
+      answerText: base.surfaceAnswer
     };
   }
 
   return {
     title: "سؤال وزاري - خيارات متقاربة",
-    sentence: `Only one option fits the sentence naturally. ${base.sentence}`,
-    answerText: base.answerText
+    sentence: `Only one option completes the sentence naturally: ${base.sentence}`,
+    answerText: base.surfaceAnswer
   };
 }
 
-function answerForOptions(item) {
-  return mainTerm(item.term);
+function optionTextForCorrect(item, surfaceAnswer) {
+  return normaliseForDisplay(surfaceAnswer || mainTerm(item.term));
 }
 
-function detectType(term) {
-  const t = cleanTerm(term).toLowerCase();
-  if (t.includes("→")) return "word-family";
-  if (t.includes("somebody") || t.includes("something")) return "pattern";
-  if (t.split(/\s+/).length >= 2) return "phrase";
-  return "word";
+function optionTextForDistractor(item) {
+  return normaliseForDisplay(mainTerm(item.term));
 }
 
-function pickDistractors(item, pool, count = 3) {
-  const correct = answerForOptions(item);
-  const type = detectType(item.term);
-
-  const sameSectionType = shuffle(pool.filter(x => x.id !== item.id && x.section === item.section && detectType(x.term) === type));
-  const sameUnitType = shuffle(pool.filter(x => x.id !== item.id && x.unit === item.unit && detectType(x.term) === type));
-  const sameSectionAny = shuffle(pool.filter(x => x.id !== item.id && x.section === item.section));
-  const sameUnitAny = shuffle(pool.filter(x => x.id !== item.id && x.unit === item.unit));
-  const all = shuffle(pool.filter(x => x.id !== item.id));
+function pickDistractors(correctItem, pool, correctText, count = 3) {
+  const type = detectType(correctItem.term);
+  const groups = [
+    pool.filter(x => x.id !== correctItem.id && x.section === correctItem.section && detectType(x.term) === type),
+    pool.filter(x => x.id !== correctItem.id && x.unit === correctItem.unit && detectType(x.term) === type),
+    pool.filter(x => x.id !== correctItem.id && x.section === correctItem.section),
+    pool.filter(x => x.id !== correctItem.id && x.unit === correctItem.unit),
+    VOCAB_ITEMS.filter(x => x.id !== correctItem.id && detectType(x.term) === type),
+    VOCAB_ITEMS.filter(x => x.id !== correctItem.id)
+  ].map(shuffle);
 
   const chosen = [];
-  for (const x of [...sameSectionType, ...sameUnitType, ...sameSectionAny, ...sameUnitAny, ...all]) {
-    const val = answerForOptions(x);
-    if (val && val !== correct && !chosen.includes(val)) chosen.push(val);
-    if (chosen.length === count) break;
+  const used = new Set([normaliseForDisplay(correctText).toLowerCase()]);
+
+  for (const group of groups) {
+    for (const item of group) {
+      if (isAmbiguousDistractor(correctItem, item)) continue;
+      const text = optionTextForDistractor(item);
+      const key = text.toLowerCase();
+      if (!text || used.has(key)) continue;
+      chosen.push({ text, item });
+      used.add(key);
+      if (chosen.length === count) return chosen;
+    }
   }
+
+  const fallback = [
+    "toxic waste", "obsolete", "blunder", "home comforts", "sensory overload",
+    "heartbreaking", "smart devices", "tangled leads", "risk", "ecstatic",
+    "water scarcity", "bias", "malfunction", "setback"
+  ];
+
+  for (const text of shuffle(fallback)) {
+    const key = text.toLowerCase();
+    if (!used.has(key)) {
+      chosen.push({ text, item: null });
+      used.add(key);
+    }
+    if (chosen.length === count) return chosen;
+  }
+
   return chosen;
 }
 
-function optionsWithAnswer(answer, distractors) {
-  return shuffle([answer, ...distractors.slice(0, 3)]);
+function makeOptions(correctItem, correctText, pool) {
+  const distractors = pickDistractors(correctItem, pool, correctText, 3);
+  return shuffle([
+    { text: correctText, item: correctItem, correct: true },
+    ...distractors.map(d => ({ text: d.text, item: d.item, correct: false }))
+  ]);
 }
 
-function meaningOfOption(option) {
-  const found = VOCAB_ITEMS.find(x => answerForOptions(x) === option || cleanTerm(x.term) === option);
-  return found ? found.meaning : "معناه مختلف عن سياق الجملة";
+function meaningOfOption(optionObj) {
+  if (!optionObj || !optionObj.item) return "معناه مختلف عن سياق الجملة";
+  return optionObj.item.meaning;
 }
 
-function explainQuestion(q, selected, isCorrect) {
+function explainQuestion(q, selectedObj, isCorrect) {
+  const correctTerm = cleanTerm(q.item.term);
+  const correctText = q.answer;
   const correctMeaning = q.item.meaning;
-  const correctTerm = answerForOptions(q.item);
-  const selectedMeaning = meaningOfOption(selected);
+  const selectedText = selectedObj.text;
+  const selectedMeaning = meaningOfOption(selectedObj);
 
   if (isCorrect) {
-    return `صح ✅ الإجابة هي "${correctTerm}" لأن معناها: ${correctMeaning}. سياق الجملة يطلب هذا المعنى تحديدًا، وباقي الخيارات قريبة بالموضوع أو الشكل لكنها لا تكمل الجملة طبيعيًا.`;
+    return `صح ✅ الإجابة هي "${correctText}" لأنها من "${correctTerm}" ومعناها: ${correctMeaning}. الجملة تحتاج هذا المعنى تحديدًا، والخيارات الثانية لا تكمل السياق بنفس الدقة.`;
   }
 
-  return `خطأ ❌ الإجابة الصحيحة هي "${correctTerm}" لأن معناها: ${correctMeaning}. اختيارك "${selected}" لا يناسب السياق لأن معناه: ${selectedMeaning}. لذلك الجملة تحتاج "${correctTerm}" وليس "${selected}".`;
+  return `خطأ ❌ الإجابة الصحيحة هي "${correctText}" لأنها من "${correctTerm}" ومعناها: ${correctMeaning}. اختيارك "${selectedText}" لا يناسب الجملة لأن معناه: ${selectedMeaning}.`;
 }
 
 function buildQuestions(selectedUnit, limit) {
@@ -4476,16 +4579,15 @@ function buildQuestions(selectedUnit, limit) {
     tracker[item.id] = nextVariant;
 
     const cloze = makeClozeSentence(item, nextVariant);
-    const answer = answerForOptions(item);
+    const answerText = optionTextForCorrect(item, cloze.answerText);
 
     questions.push({
       item,
       variant: nextVariant,
       title: cloze.title,
       question: `Complete the sentence with the correct word or phrase:\n${cloze.sentence}`,
-      answer,
-      options: optionsWithAnswer(answer, pickDistractors(item, pool)),
-      surfaceAnswer: cloze.answerText
+      answer: answerText,
+      options: makeOptions(item, answerText, pool)
     });
   });
 
@@ -4493,15 +4595,20 @@ function buildQuestions(selectedUnit, limit) {
   return shuffle(questions).slice(0, limit);
 }
 
+function clearPreviousAnswerUI() {
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback";
+  feedback.textContent = "";
+  document.getElementById("optionsGrid").innerHTML = "";
+}
+
 function renderQuestion() {
   const q = state.questions[state.index];
   const questionArea = document.getElementById("questionArea");
   const optionsGrid = document.getElementById("optionsGrid");
-  const feedback = document.getElementById("feedback");
 
   state.answered = false;
-  feedback.className = "feedback";
-  feedback.textContent = "";
+  clearPreviousAnswerUI();
 
   document.getElementById("questionNumber").textContent = state.index + 1;
   document.getElementById("totalQuestions").textContent = state.questions.length;
@@ -4518,31 +4625,31 @@ function renderQuestion() {
     </div>
   `;
 
-  optionsGrid.innerHTML = "";
-  q.options.forEach((option, idx) => {
+  q.options.forEach((optionObj, idx) => {
     const btn = document.createElement("button");
     btn.className = "option";
     btn.type = "button";
-    btn.innerHTML = `<strong>${["A", "B", "C", "D"][idx]}.</strong> ${normaliseForDisplay(option)}`;
-    btn.addEventListener("click", () => answerQuestion(option, btn));
+    btn.dataset.optionText = optionObj.text;
+    btn.innerHTML = `<strong>${["A", "B", "C", "D"][idx]}.</strong> ${optionObj.text}`;
+    btn.addEventListener("click", () => answerQuestion(optionObj, btn));
     optionsGrid.appendChild(btn);
   });
 }
 
-function answerQuestion(selected, btn) {
+function answerQuestion(selectedObj, btn) {
   if (state.answered) return;
   state.answered = true;
 
   const q = state.questions[state.index];
-  const isCorrect = selected === q.answer;
+  const isCorrect = selectedObj.text === q.answer;
   const buttons = document.querySelectorAll(".option");
 
   buttons.forEach(b => {
     b.classList.add("disabled");
-    if (b.textContent.includes(q.answer)) b.classList.add("correct");
+    if (b.dataset.optionText === q.answer) b.classList.add("correct");
   });
 
-  const explanation = explainQuestion(q, selected, isCorrect);
+  const explanation = explainQuestion(q, selectedObj, isCorrect);
 
   if (isCorrect) {
     state.score++;
@@ -4551,7 +4658,7 @@ function answerQuestion(selected, btn) {
     btn.classList.add("wrong");
     state.mistakes.push({
       question: q.question,
-      selected,
+      selected: selectedObj.text,
       correct: q.answer,
       term: cleanTerm(q.item.term),
       unit: q.item.unitTitle,
@@ -4560,6 +4667,7 @@ function answerQuestion(selected, btn) {
   }
 
   document.getElementById("scoreValue").textContent = state.score;
+
   const feedback = document.getElementById("feedback");
   feedback.className = `feedback show ${isCorrect ? "correct" : "wrong"}`;
   feedback.textContent = explanation;
@@ -4567,6 +4675,14 @@ function answerQuestion(selected, btn) {
 
 function nextQuestion() {
   if (!state.questions.length) return;
+
+  if (!state.answered) {
+    const feedback = document.getElementById("feedback");
+    feedback.className = "feedback show wrong";
+    feedback.textContent = "اختار إجابة أولًا، بعدين اضغط السؤال التالي.";
+    return;
+  }
+
   if (state.index < state.questions.length - 1) {
     state.index++;
     renderQuestion();
@@ -4583,6 +4699,7 @@ function finishExam() {
   `;
   document.getElementById("optionsGrid").innerHTML = "";
   document.getElementById("feedback").className = "feedback";
+  document.getElementById("feedback").textContent = "";
 
   const box = document.getElementById("mistakesBox");
   if (!state.mistakes.length) {
@@ -4623,6 +4740,7 @@ function resetExam() {
   state.score = 0;
   state.answered = false;
   state.mistakes = [];
+
   document.getElementById("activeExamUnit").textContent = "-";
   document.getElementById("questionNumber").textContent = "0";
   document.getElementById("totalQuestions").textContent = "0";
@@ -4636,6 +4754,7 @@ function resetExam() {
     <button class="option" type="button">D</button>
   `;
   document.getElementById("feedback").className = "feedback";
+  document.getElementById("feedback").textContent = "";
   document.getElementById("mistakesBox").innerHTML = "هون بنحط لاحقًا الأخطاء حسب الوحدة والكلمة ونوع السؤال";
 }
 
